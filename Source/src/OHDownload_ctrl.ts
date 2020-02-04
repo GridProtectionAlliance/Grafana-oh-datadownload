@@ -105,8 +105,8 @@ export class OHDownloadCtrl extends MetricsPanelCtrl{
         data.forEach(point => {
             promiseData.push(this.datasource.getMetaData(point.target).then(function (metaData) {
                 let jsonMetaData = JSON.parse(metaData.data);
-                ctrl.pointIDs.push(jsonMetaData[0]["ID"]);
-
+                let id = jsonMetaData[0]["ID"].split(":")
+                ctrl.pointIDs.push(id[1].trim())
             }))
 
             if (point.datapoints.length > 0) {
@@ -149,7 +149,7 @@ export class OHDownloadCtrl extends MetricsPanelCtrl{
             tolerance = 500 / framerate;
         }
 
-        this.fileLink = this.panel.link + '\ExportDataHandler.ashx?PointIDs=' + '1544,1684' +
+        this.fileLink = this.panel.link + '\ExportDataHandler.ashx?PointIDs=' + this.pointIDs.join(",") +
             "&StartTime=" + this.startTime.format("DD/MM/YYYY HH:mm:ss.000000") + "&EndTime=" + this.endTime.format("DD/MM/YYYY HH:mm:ss.000000") +
             "&FrameRate=" + framerate.toString() + "&AlignTimestamps=" + ((this.panel.alignTS) ? "true" : "false") +
             "&MissingAsNaNParam=" + ((this.panel.exportNaN) ? "true" : "false") +
