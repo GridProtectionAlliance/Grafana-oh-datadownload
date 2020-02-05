@@ -150,7 +150,7 @@ export class OHDownloadCtrl extends MetricsPanelCtrl{
         }
 
         this.fileLink = this.panel.link + '\ExportDataHandler.ashx?PointIDs=' + this.pointIDs.join(",") +
-            "&StartTime=" + this.startTime.format("DD/MM/YYYY HH:mm:ss.000000") + "&EndTime=" + this.endTime.format("DD/MM/YYYY HH:mm:ss.000000") +
+            "&StartTime=" + this.startTime.format("MM/DD/YYYY HH:mm:ss.000000") + "&EndTime=" + this.endTime.format("MM/DD/YYYY HH:mm:ss.000000") +
             "&FrameRate=" + framerate.toString() + "&AlignTimestamps=" + ((this.panel.alignTS) ? "true" : "false") +
             "&MissingAsNaNParam=" + ((this.panel.exportNaN) ? "true" : "false") +
             "&FillMissingTimestamps=" + ((this.panel.missingTS) ? "true" : "false") +
