@@ -59,6 +59,7 @@ export class OHDownloadCtrl extends MetricsPanelCtrl{
         this.panel.round = (this.panel.round != undefined ? this.panel.round : true); 
 
         this.panel.color = (this.panel.color != undefined ? this.panel.color : '#ff0000'); 
+        this.panel.textcolor = (this.panel.textcolor != undefined ? this.panel.textcolor : '#ffffff'); 
         this.panel.fontsize = (this.panel.fontsize != undefined ? this.panel.fontsize : '100%');
         
 
