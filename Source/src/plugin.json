@@ -1,6 +1,6 @@
 {
     "type":  "panel",
-    "name":  "OpenHistorianDataDownloadPanel",
+    "name":  "OH Data Download",
     "id":  "openhistorian-datadownload-panel",
     "info":  {
                  "description":  "Panel to Dowload data from the OpenHistorian in CSV format",
