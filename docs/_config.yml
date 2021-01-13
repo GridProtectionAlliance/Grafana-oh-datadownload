@@ -1,8 +1,8 @@
 theme: jekyll-theme-cayman
-title: GrafanaAlarmPanel.documentation
-description: OpenHistorian Device Status Alarm Panel Documentation
+title: OHDataDownload.documentation
+description: OpenHistorian Data Download Panel
 github:
-  repository_name: openHistorianGrafanaAlarmPanel
+  repository_name: Grafana-oh-datadownload
   owner_url: https://www.gridprotectionalliance.org
   owner_name: Grid Protection Alliance
 plugins:

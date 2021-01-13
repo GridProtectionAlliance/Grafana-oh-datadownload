@@ -11,7 +11,7 @@ If the Grafana included in the openHistorina installation is used this is alread
 ![Phasor Alarm Panel](./img/Example.png)
 # Description
 
-The panel consists of a single button. By clicking the Button the user can download a .csv file from the openHistorian, wghich will contain all data currently available to the Panel.
+The panel consists of a single button. By clicking the Button the user can download a .csv file from the openHistorian, which will contain all data currently available to the Panel.
 In order to match the data dowloaded to another panel (such as a graph) on the dashboard [Grafana Templating Variables](https://grafana.com/docs/grafana/latest/reference/templating/) should be used. 
 
 ## Settings
