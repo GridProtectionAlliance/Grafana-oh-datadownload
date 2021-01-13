@@ -1,26 +1,9 @@
 {
+  "extends": "./node_modules/@grafana/toolkit/src/config/tsconfig.plugin.json",
+  "include": ["src", "types"],
   "compilerOptions": {
-    "strictNullChecks": true,
-    "module": "none",
-    "target": "es6",
     "rootDir": "./src",
     "baseUrl": "./src",
-    "lib": [ "dom", "es2015", "es2016" ],
-    "declaration": false,
-    "allowSyntheticDefaultImports": true,
-    "inlineSourceMap": false,
-    "sourceMap": true,
-    "noEmitOnError": false,
-    "emitDecoratorMetadata": false,
-    "experimentalDecorators": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": false,
-    "noImplicitUseStrict": false,
-    "noImplicitAny": false,
-    "noUnusedLocals": false,
-    "moduleResolution": "node"
-  },
-  "include": [
-    "./src/**/*.ts"
-  ]
+    "typeRoots": ["./node_modules/@types"]
+  }
 }
