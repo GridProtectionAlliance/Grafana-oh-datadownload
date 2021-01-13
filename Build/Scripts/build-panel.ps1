@@ -130,55 +130,55 @@ function Deploy($target, $name, $source, $deployZip, $deployBinaries) {
 # --------- Start Script ---------
 
 # Get latest repository
-Set-Location $projectDir
+# Set-Location $projectDir
 
 #Comment while working on the build script
-Reset-Repository
+# Reset-Repository
 
-$changed = Test-RepositoryChanged
+# $changed = Test-RepositoryChanged
 
-if ($changed) {
-    $changed = $false
+# if ($changed) {
+ #   $changed = $false
 	
 	#Version The Repository
-	$version = "0.0.0"
+#	$version = "0.0.0"
    
-	if (-not (Read-Version "$projectDir\$pluginFile" ([ref]$version))) {
-		"ERROR: Failed to read version."
-		return
-	}
+#	if (-not (Read-Version "$projectDir\$pluginFile" ([ref]$version))) {
+#		"ERROR: Failed to read version."
+#		return
+#	}
 	
-	"Current version = $version"
+#	"Current version = $version"
 
 	# Increment version build number
-	$version = Increment-Version $version
+#	$version = Increment-Version $version
 
-	"Updating version to $version"
+#	"Updating version to $version"
 	
-	if (-not (Update-Version -target "$projectDir\$pluginFile" -newVersion $version)) {
-                "ERROR: Failed to update version."
-                return
-            }
+#	if (-not (Update-Version -target "$projectDir\$pluginFile" -newVersion $version)) {
+ #               "ERROR: Failed to update version."
+ #               return
+ #           }
 		
 	# Set Location to build folder and Install NPM
-	Set-Location "$projectDir\$buildFolder"
-	Install-NPM
-	Build-TS
-	Set-Location $projectDir
-	Deploy -target "$projectDir" -source "$projectDir\Build\Output\$buildConfig\dist"  -name "$repo" -DeployZip "\\gpaweb\NightlyBuilds\GrafanaPanels" -DeployBinaries "\\gpaweb\NightlyBuilds\GrafanaPanels\Binaries\$repo"
+#	Set-Location "$projectDir\$buildFolder"
+#	Install-NPM
+#	Build-TS
+#	Set-Location $projectDir
+#	Deploy -target "$projectDir" -source "$projectDir\Build\Output\$buildConfig\dist"  -name "$repo" -DeployZip "\\gpaweb\NightlyBuilds\GrafanaPanels" -DeployBinaries "\\gpaweb\NightlyBuilds\GrafanaPanels\Binaries\$repo"
 
 	#Commit
-	"Committing to remote repository"
-	Commit-Repository "." "Updated $repo version to $version"
+#	"Committing to remote repository"
+#	Commit-Repository "." "Updated $repo version to $version"
 	
-	Push-Repository
+#	Push-Repository
 	
 	# Tag repo to mark new changes
-	$tag = $(get-date).ToString("yyyyMMddHHmmss")
-	"Tag Repository to $tag"
+#	$tag = $(get-date).ToString("yyyyMMddHHmmss")
+#	"Tag Repository to $tag"
 	
-    Tag-Repository $tag
-	}
+ #   Tag-Repository $tag
+#	}
 	
-Set-Location $projectDir		
+#Set-Location $projectDir		
 	
