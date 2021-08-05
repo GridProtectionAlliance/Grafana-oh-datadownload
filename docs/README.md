@@ -2,6 +2,7 @@
 <img align="left"  style="height:100px" src="./img/GPA.png" alt="Grid Protection Alliance">
 </div>
 
+
 # Overview
 
 This plugin is a Grana panel to download data from the openHistorian.
