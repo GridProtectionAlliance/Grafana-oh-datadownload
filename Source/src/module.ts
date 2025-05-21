@@ -11,7 +11,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(ExportDataPanel).setPanelOp
       defaultValue: 30,
       settings: {
         min: 0,
-      }
+      },
     })
     .addSelect({
       path: 'RateBase',
@@ -19,43 +19,50 @@ export const plugin = new PanelPlugin<SimpleOptions>(ExportDataPanel).setPanelOp
       defaultValue: 'frames per second',
       settings: {
         options: [
-          {label: 'frames per second', value: 'frames per second'},
-          {label: 'frames per minute', value: 'frames per minute'},
-          {label: 'frames per hour', value: 'frames per hour'},
-      ],
-      }
+          { label: 'frames per second', value: 'frames per second' },
+          { label: 'frames per minute', value: 'frames per minute' },
+          { label: 'frames per hour', value: 'frames per hour' },
+        ],
+      },
     })
     .addSelect({
       path: 'FirstTS',
-      defaultValue:'first available measurement',
+      defaultValue: 'first available measurement',
       name: 'First Timestamp Based On',
       settings: {
         options: [
-          {label: 'first available measurement', value: 'first available measurement'},
-          {label: 'exact start time', value: 'exact start time'}
-      ],
-      }
-    }).addBooleanSwitch({
+          { label: 'first available measurement', value: 'first available measurement' },
+          { label: 'exact start time', value: 'exact start time' },
+        ],
+      },
+    })
+    .addBooleanSwitch({
       path: 'AlignT',
       defaultValue: true,
       name: 'Align Timestamps',
-    }).addBooleanSwitch({
+    })
+    .addBooleanSwitch({
       path: 'ExportNaN',
       defaultValue: true,
       name: 'Export Missing Values as NaN',
-    }).addBooleanSwitch({
+    })
+    .addBooleanSwitch({
       path: 'MissingTS',
       defaultValue: true,
       name: 'Fill-in Missing Timestamps',
-      description: "Export timestamps with monotonically increasing time based on frame rate with no missing rows, i.e., when no data is archived for a timestamp, write a blank row and don’t skip times."
-    }).addBooleanSwitch({
+      description:
+        'Export timestamps with monotonically increasing time based on frame rate with no missing rows, i.e., when no data is archived for a timestamp, write a blank row and don’t skip times.',
+    })
+    .addBooleanSwitch({
       path: 'Round',
       defaultValue: true,
       name: 'Round to Frame Rate Timestamps',
-      description: "Exporting with timestamps rounded to closest frame rate will export <b>generated</b> timestamps with data matched into closest alignment. " +
-                  "Note that this will result in an export where timestamp values do not match original data, but are sorted into closest timestamps. " +
-                  "This is similar to how \"concentration\" features operate when using synchrophasor data."
-    }).addTextInput({
+      description:
+        'Exporting with timestamps rounded to closest frame rate will export <b>generated</b> timestamps with data matched into closest alignment. ' +
+        'Note that this will result in an export where timestamp values do not match original data, but are sorted into closest timestamps. ' +
+        'This is similar to how "concentration" features operate when using synchrophasor data.',
+    })
+    .addTextInput({
       path: 'Link',
       defaultValue: '..',
       name: 'OH Link Address',
@@ -66,18 +73,20 @@ export const plugin = new PanelPlugin<SimpleOptions>(ExportDataPanel).setPanelOp
       name: 'Font Size',
       settings: {
         options: [
-          {label: '100%', value: 100},
-          {label: '110%', value: 110},
-          {label: '300%', value: 300}
-      ],
-      }
-    }).addColorPicker({
-      path: "TextColor",
-      defaultValue: "#ffffff",
-      name: 'Text Color',
-    }).addColorPicker({
-      path: "Color",
-      defaultValue: "#ff0000",
-      name: 'Color',
+          { label: '100%', value: 100 },
+          { label: '110%', value: 110 },
+          { label: '300%', value: 300 },
+        ],
+      },
     })
+    .addColorPicker({
+      path: 'TextColor',
+      defaultValue: '#ffffff',
+      name: 'Text Color',
+    })
+    .addColorPicker({
+      path: 'Color',
+      defaultValue: '#ff0000',
+      name: 'Color',
+    });
 });
