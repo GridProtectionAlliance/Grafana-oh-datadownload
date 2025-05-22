@@ -16,6 +16,13 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
   const [endTime, setEndTime] = React.useState<number>(0);
   const [pointIDs, setPointIDs] = React.useState<string[]>([]);
 
+  const formatTSSnap = React.useCallback(() => {
+    if (options.FirstTS === 'first available measurement') {
+      return 1;
+    }
+    return 2;
+  }, [options.FirstTS]);
+
   React.useEffect(() => {
     let framerate = options.Rate;
 
@@ -57,13 +64,6 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
 
     setFileLink(link);
   }, [options, startTime, endTime, pointIDs, formatTSSnap]);
-
-  const formatTSSnap = React.useCallback(() => {
-    if (options.FirstTS === 'first available measurement') {
-      return 1;
-    }
-    return 2;
-  }, [options.FirstTS]);
 
   React.useEffect(() => {
     if (data.state !== 'Done') {
