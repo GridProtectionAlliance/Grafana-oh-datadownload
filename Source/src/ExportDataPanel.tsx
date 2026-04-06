@@ -80,14 +80,14 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
 
     setPointIDs([]);
     // target....
-    data.series.forEach(element => {
+    data.series.forEach((element) => {
       const dat = { target: element.name };
       getBackendSrv()
         .post(options.Link + 'api/grafana' + '/GetMetadata', dat)
-        .then(d => {
+        .then((d) => {
           const jsonMetaData = JSON.parse(d);
           const id = jsonMetaData[0]['ID'].split(':');
-          setPointIDs(arr => [...arr, id[1].trim()]);
+          setPointIDs((arr) => [...arr, id[1].trim()]);
         });
     });
   }, [data, options.Link]);

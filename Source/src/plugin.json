@@ -6,7 +6,7 @@
     "description":  "Panel to Dowload data from the OpenHistorian in CSV format",
     "author":  {
 	  "name":  "GridProtectionAlliance",
-       "url":  "http//www.gridprotectionalliance.org"
+       "url":  "http://www.gridprotectionalliance.org"
      },
      "keywords":  [
        "openHistorian",
@@ -20,12 +20,12 @@
      "links":  [
        {
          "name":  "Projectsite",
-         "url":  "https//github.com/GridProtectionAlliance/"
+         "url":  "https://github.com/GridProtectionAlliance/"
        }
      ],
      "screenshots":  [],
-	 "version":  "0.1.4",
-	 "updated":  "2020-09-04"
+	 "version":  "0.1.5",
+	 "updated":  "2026-04-06"
    },
    "dependencies": {
    "grafanaVersion": "7.0.x",

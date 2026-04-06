@@ -2,7 +2,7 @@ import { PanelPlugin } from '@grafana/data';
 import { SimpleOptions } from './types';
 import { ExportDataPanel } from './ExportDataPanel';
 
-export const plugin = new PanelPlugin<SimpleOptions>(ExportDataPanel).setPanelOptions(builder => {
+export const plugin = new PanelPlugin<SimpleOptions>(ExportDataPanel).setPanelOptions((builder) => {
   return builder
     .addNumberInput({
       path: 'Rate',
@@ -64,7 +64,7 @@ export const plugin = new PanelPlugin<SimpleOptions>(ExportDataPanel).setPanelOp
     })
     .addTextInput({
       path: 'Link',
-      defaultValue: '..',
+      defaultValue: '../',
       name: 'OH Link Address',
     })
     .addSelect({
