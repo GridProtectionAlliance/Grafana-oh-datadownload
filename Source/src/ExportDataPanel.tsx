@@ -1,5 +1,5 @@
 import React from 'react';
-import { PanelProps, dateTimeAsMoment } from '@grafana/data';
+import { PanelProps, dateTimeAsMoment, dateTimeFormatISO, dateTimeFormatTimeAgo } from '@grafana/data';
 import { SimpleOptions } from 'types';
 import { css, cx } from 'emotion';
 import { stylesFactory } from '@grafana/ui';
@@ -15,6 +15,9 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
   const [startTime, setStartTime] = React.useState<number>(0);
   const [endTime, setEndTime] = React.useState<number>(0);
   const [pointIDs, setPointIDs] = React.useState<string[]>([]);
+  const [instance, setInstance] = React.useState<string>('PPA');
+
+  const pointIDField = "ID";
 
   const formatTSSnap = React.useCallback(() => {
     if (options.FirstTS === 'first available measurement') {
@@ -39,6 +42,10 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
       tolerance = 500 / framerate;
     }
 
+    if (pointIDs.length === 0) {
+      throw new Error('Unable to find data to be downloaded');
+    }
+
     const link =
       options.Link +
       'ExportDataHandler.ashx?PointIDs=' +
@@ -56,19 +63,16 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
       '&FillMissingTimestamps=' +
       (options.MissingTS ? 'true' : 'false') +
       '&InstanceName=' +
-      'PPA' +
+      instance +
       '&TSSnap=' +
       formatTSSnap().toString() +
       '&TSTolerance=' +
       tolerance.toString();
 
     setFileLink(link);
-  }, [options, startTime, endTime, pointIDs, formatTSSnap]);
+  }, [options, startTime, endTime, pointIDs, formatTSSnap, instance]);
 
   React.useEffect(() => {
-    if (data.state !== 'Done') {
-      return;
-    }
 
     if (data.timeRange !== undefined && data.timeRange.from !== undefined) {
       setStartTime(dateTimeAsMoment(data.timeRange.from).valueOf());
@@ -78,18 +82,28 @@ export const ExportDataPanel: React.FC<Props> = ({ options, data, width, height 
       setEndTime(dateTimeAsMoment(data.timeRange.to).valueOf());
     }
 
-    setPointIDs([]);
-    // target....
+    const pointIDs: string[] = [];
+    let instanceName = 'PPA';
+
+    const idIndex = data.series[0].fields.findIndex((f) => f.name === pointIDField);
+    if (idIndex === -1) 
+      throw new Error('Unable to find Point ID field in data series Please add ID to Meta Data Request');
+
     data.series.forEach((element) => {
-      const dat = { target: element.name };
-      getBackendSrv()
-        .post(options.Link + 'api/grafana' + '/GetMetadata', dat)
-        .then((d) => {
-          const jsonMetaData = JSON.parse(d);
-          const id = jsonMetaData[0]['ID'].split(':');
-          setPointIDs((arr) => [...arr, id[1].trim()]);
-        });
+
+      if (element.fields[idIndex].values.length === 0) 
+        return;
+
+
+      const dat = element.fields[idIndex].values[0]
+      const id = dat.split(':');
+      instanceName = id[0].trim();
+      pointIDs.push(id[1].trim());
     });
+
+    setPointIDs(pointIDs);
+    setInstance(instanceName);
+
   }, [data, options.Link]);
 
   function handleClick() {
